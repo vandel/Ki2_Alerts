@@ -8,24 +8,22 @@ from datetime import datetime
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
-class HFT1Handler(FileSystemEventHandler):
-    def __init__(self, csv_path, parquet_path, last_size_path, schema):
-        self.csv_path = csv_path
-        self.parquet_path = parquet_path
-        self.last_size_path = last_size_path
-        self.schema = schema
+# class HFT1Handler(FileSystemEventHandler):
+#     def __init__(self, csv_path, parquet_path, last_size_path, schema):
+#         self.csv_path = csv_path
+#         self.parquet_path = parquet_path
+#         self.last_size_path = last_size_path
+#         self.schema = schema
 
-    def on_modified(self, event):
-        if event.src_path.endswith(self.csv_path.split('/')[-1]):
-            df = monitor_and_update_hft1_parquet(
-                csv_path=self.csv_path,
-                parquet_path=self.parquet_path,
-                last_size_path=self.last_size_path,
-                schema=self.schema
-            )
-            print(f"Processed {df.height} rows. Last updated: {datetime.now()}")
-
-
+#     def on_modified(self, event):
+#         if event.src_path.endswith(self.csv_path.split('/')[-1]):
+#             df = monitor_and_update_hft1_parquet(
+#                 csv_path=self.csv_path,
+#                 parquet_path=self.parquet_path,
+#                 last_size_path=self.last_size_path,
+#                 schema=self.schema
+#             )
+#             print(f"Processed {df.height} rows. Last updated: {datetime.now()}")
 
 def extract_date_from_filename_datetime(filename):
     import re
@@ -113,33 +111,47 @@ if __name__ == "__main__":
 
     # filepath: c:\Users\vande\Desktop\Projects\Ki2_Alerts\Code\monitor_hft1_file.py
 
-    today_str = datetime.today().strftime('%Y%m%d')
-    csv_path = f"./Data/{today_str}_hft1.csv"
-    parquet_path = f"./Processed_Data/{today_str}_hft1.parquet"
-    last_size_path = f"./Data/{today_str}_hft1_lastsize.pkl"
+    # today_str = datetime.today().strftime('%Y%m%d')
 
+    today_str = datetime.today().strftime('%Y%m%d')
+    print(f"Today's date string: {today_str}")
+
+    # make today-str year/month/day format
+    today_str1 = datetime.today().strftime('%Y/%m/')
+    print(f"Today's date string in year/month/day format: {today_str1}{today_str}")
+
+    csv_path = f"./Code/Data/{today_str}_hft1.csv"
+    print(f"Today's csv_path: {csv_path}")
+    parquet_path = f"./Code/Processed_Data/{today_str1}{today_str}_hft1.parquet"
+    print(f"Today's parquet_path: {parquet_path}")
+    last_size_path = f"./Code/Data/{today_str}_hft1_lastsize.pkl"
+    print(f"Today's last_size_path: {last_size_path}")
+    print("Monitoring started. Press Ctrl+C to exit.")
+    last_size=0
+    try:
+        while True:
+            df = monitor_and_update_hft1_parquet(
+                csv_path=csv_path,
+                parquet_path=parquet_path,
+                last_size_path=last_size_path,
+                schema=schema
+            )
+            print(f"Processed {df.height} rows. Last updated: {datetime.now()}")
+            pytime.sleep(10)
+    except KeyboardInterrupt:
+        print("Keyboard interrupt detected. Exiting...")
+
+    # print(os.path.abspath("./Code/Data"))
+    # print(os.path.isdir("./Code/Data")) 
+
+    # event_handler = HFT1Handler(csv_path, parquet_path, last_size_path, schema)
+    # observer = Observer()
+    # observer.schedule(event_handler, path="./Code/Data", recursive=False)
+    # observer.start()
     # print("Monitoring started. Press Ctrl+C to exit.")
     # try:
     #     while True:
-    #         df = monitor_and_update_hft1_parquet(
-    #             csv_path=csv_path,
-    #             parquet_path=parquet_path,
-    #             last_size_path=last_size_path,
-    #             schema=schema
-    #         )
-    #         print(f"Processed {df.height} rows. Last updated: {datetime.now()}")
-    #         pytime.sleep(10)
+    #         pytime.sleep(1)
     # except KeyboardInterrupt:
-    #     print("Keyboard interrupt detected. Exiting...")
-
-    event_handler = HFT1Handler(csv_path, parquet_path, last_size_path, schema)
-    observer = Observer()
-    observer.schedule(event_handler, path="./Data", recursive=False)
-    observer.start()
-    print("Monitoring started. Press Ctrl+C to exit.")
-    try:
-        while True:
-            pytime.sleep(1)
-    except KeyboardInterrupt:
-        observer.stop()
-    observer.join()
+    #     observer.stop()
+    # observer.join()
