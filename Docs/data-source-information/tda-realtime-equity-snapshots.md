@@ -1,2 +1,0 @@
-# TDA Realtime Equity Snapshots
-
