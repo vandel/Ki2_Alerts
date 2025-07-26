@@ -1,10 +1,6 @@
 # HFT Alert Data Schema
 
-The HFT Alert Burst Data is collected by a process that executes the program HFTABurstMonitor.exe, the current version of which is V 1.1.3.J.   The running of this process is supervised by Node-Red and is described in the documentation section linked here.
-
-{% content-ref url="../../process-automation/node-red-automation-of-burst-monitor-data-capture.md" %}
-[node-red-automation-of-burst-monitor-data-capture.md](../../process-automation/node-red-automation-of-burst-monitor-data-capture.md)
-{% endcontent-ref %}
+The HFT Alert Burst Data is collected by a process that executes the program HFTABurstMonitor.exe, the current version of which is V 1.1.3.J.  &#x20;
 
 The data captured by this process is initially placed in three directories.
 
