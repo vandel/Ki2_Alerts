@@ -1,2 +1,0 @@
-# Schwab Market Data API
-
