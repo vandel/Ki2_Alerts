@@ -77,6 +77,13 @@ Or on Linux or MAC OS
 ````
 
 7. Once the virtual environment is activated, you can install Python packages using `pip`. These packages will be installed in the virtual environment, not globally on your system.
-8. In VS Code, you'll need to select the interpreter for the workspace. Go to `View > Command Palette`, then search for `Python: Select Interpreter`. Choose the interpreter that corresponds to the virtual environment you just created.
+8. A Complete list of current requirements can be found in the file requirements.tx which can be installed into the venv environment using the following command:
+
+````
+// ```pip install -r requirements.txt
+```
+````
+
+7. In VS Code, you'll need to select the interpreter for the workspace. Go to `View > Command Palette`, then search for `Python: Select Interpreter`. Choose the interpreter that corresponds to the virtual environment you just created.
 
 Your new VS Code workspace is now set up with a Python environment. You can start adding Python files to your workspace and they'll use the packages and settings from the virtual environment.
