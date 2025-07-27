@@ -4,6 +4,7 @@
 * [Getting Started](getting-started/README.md)
   * [Getting Started with VSCode](getting-started/getting-started-with-vscode.md)
   * [Getting Started with Burst Monitor](getting-started/getting-started-with-burst-monitor.md)
+  * [Daily Operation](getting-started/daily-operation.md)
 * [Design Considerations](design-considerations/README.md)
   * [Data Buffering Network Bandwidth Issues](design-considerations/data-buffering-network-bandwidth-issues.md)
 * [Data Source Information](data-source-information/README.md)
